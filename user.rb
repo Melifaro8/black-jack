@@ -1,21 +1,23 @@
 class User
 
+  attr_accessor :name, :hand, :balance, :points
+
   def initialize (name)
     @name = name
-    @hand = {}
+    @hand = []
     @balance = 100
-  end
-
-    
+    @points = []
+  end    
 end
 
 class Dealer < User
 
-  def initialize
-    @name = dealer
-    @balance = 100
-    @hand = {}
-  end 
+  attr_reader :name, :hand, :balance
 
-  
+  def initialize
+    @name = "Dealer"
+    @balance = 100
+    @hand = []
+    @points = []
+  end 
 end

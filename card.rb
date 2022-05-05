@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class Card
   attr_reader :suite, :value
 
-  def initialize (suite, value)
+  def initialize(suite, value)
     @suite = suite
     @value = value
   end
 
   def output
-    "#{suite} - #{value}"
+    "#{value} - #{suite}"
   end
 end
