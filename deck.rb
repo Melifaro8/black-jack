@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+
+require_relative 'card'
+
 class Deck
   attr_reader :deck
 
@@ -6,12 +9,17 @@ class Deck
   SUITE = ['♢', '♣', '♡', '♠'].freeze
 
   def initialize
-    @deck = ganerate_deck
+    @deck = []
+    generate_deck
     shuffle_deck
   end
 
-  def ganerate_deck
-    @deck = VALUE.product(SUITE)
+  def generate_deck
+    SUITE.each do |suite|
+      VALUE.each do |value|
+        @deck << Card.new(suite, value)
+      end
+    end
   end
 
   def shuffle_deck
