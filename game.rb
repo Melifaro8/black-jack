@@ -41,8 +41,6 @@ class Game
       when 3
         open_cards
         break
-      when 4
-        break
       end
       if user.hand.size == 3 && dealer.hand.size == 3
         open_cards
@@ -63,7 +61,7 @@ class Game
     dealer.take_card(2, @current_deck)
   end
 
-  #private
+  private
 
   def do_rate
     user.balance -= RATE/2
@@ -100,6 +98,7 @@ class Game
     Interface.info(dealer)
     user.clean_hand
     dealer.clean_hand
+    
   end
 
   def calculate_round
