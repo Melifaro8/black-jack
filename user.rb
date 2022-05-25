@@ -4,7 +4,8 @@ require_relative 'deck'
 require_relative 'card'
 
 class User
-  attr_reader :name, :hand, :balance, :rangs
+  attr_accessor :balance, :hand
+  attr_reader :name, :rangs
 
   def initialize(name)
     @name = name
@@ -38,8 +39,8 @@ class User
   end
 
 
-  def show_card
-    puts 'Ваши карты:'
+  def show_card(name)
+    puts "Карты #{name}:"
     @hand.each do |card|
       puts "#{card.suite}, #{card.value}, "
     end
@@ -53,12 +54,11 @@ class User
   end
 
   def clean_hand
-    hand.clear
-    self.points = 0
+    self.hand = []
   end
 
   def bust?
-    true if points > 21
+    true if self.points_counter > 21
   end
 end
 

@@ -8,7 +8,7 @@ require_relative 'user'
 class Game
   include Interface
   attr_accessor :dealer, :user, :bank, :current_deck, :deck, :points_counter
-  attr_reader :take_card
+  attr_reader :take_card, :hand
 
   RATE = 20
   @@round_num = 0
@@ -38,7 +38,6 @@ class Game
       when 2
         user_move
         Interface.info(user)
-        dealer_move
       when 3
         open_cards
         break
@@ -64,30 +63,30 @@ class Game
     dealer.take_card(2, @current_deck)
   end
 
-  private
+  #private
 
   def do_rate
-    @user.balance -= RATE / 2
-    @dealer.balance -= RATE / 2
+    user.balance -= RATE/2
+    dealer.balance -= RATE/2
   end
 
   def first_round
     do_rate
     user.take_card(2, @current_deck)
     dealer.take_card(2, @current_deck)
-    user.show_card
+    user.show_card(user.name)
     Interface.info(user)
     dealer.hide_hand
   end
 
   def user_move
-    dealer.take_card(1, @current_deck)
-    user.show_card
-    Interface.info(user)
+    user.take_card(1, @current_deck)
+    user.show_card(user.name)
+    open_cards if user.points_counter >= 21
   end
 
   def dealer_move
-    if dealer.points < 17
+    if dealer.points_counter < 17
       dealer.take_card(1, @current_deck)
     else
       'Пас'
@@ -97,7 +96,7 @@ class Game
 
   def open_cards
     calculate_round
-    dealer.show_card
+    dealer.show_card(dealer.name)
     Interface.info(dealer)
     user.clean_hand
     dealer.clean_hand

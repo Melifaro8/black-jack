@@ -13,7 +13,7 @@ module Interface
   end
 
   def info(user)
-    puts "У Вас: #{user.points_counter} очков, Баланс: #{user.balance}"
+    puts "Информация #{user.name}: #{user.points_counter} очков, Баланс: #{user.balance}"
   end
 
   def choise
