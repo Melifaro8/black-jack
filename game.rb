@@ -104,14 +104,14 @@ class Game
   end
 
   def calculate_round
-    if (user.bust? && dealer.bust?) || (user.points == dealer.points)
+    if (user.bust? && dealer.bust?) || (user.points_counter == dealer.points_counter)
       Interface.draw_round
       user.balance += RATE / 2
       dealer.balance += RATE / 2
-    elsif (dealer.points > user.points || user.bust?) && dealer.points <= 21
+    elsif (dealer.points_counter > user.points_counter || user.bust?) && dealer.points_counter <= 21
       Interface.user_lose
       dealer.balance += RATE
-    elsif (user.points > dealer.points || dealer.bust?) && user.points <= 21
+    elsif (user.points_counter > dealer.points_counter || dealer.bust?) && user.points_counter <= 21
       Interface.user_win
       user.balance += RATE
     end
